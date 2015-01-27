@@ -63,7 +63,7 @@ themesmenu = Menu(menubar, tearoff=0)
 viewmenu.add_cascade(label="Themes", menu=themesmenu)
 
 #we define a color scheme dictionary containg name and color code as key value pair
-clrschms = {
+color_schemes = {
 '1. Default White': 'FFFFFF',
 '2. Greygarious Grey':'D1D4D1',
 '3. Lovely Lavender':'E1E1FF' , 
@@ -74,7 +74,7 @@ clrschms = {
 }
 themechoice= StringVar()
 themechoice.set('1. Default White')
-for k in sorted(clrschms):
+for k in sorted(color_schemes):
     themesmenu.add_radiobutton(label=k, variable=themechoice)
 menubar.add_cascade(label="View", menu=viewmenu)
 
@@ -85,5 +85,17 @@ aboutmenu.add_command(label="Help")
 menubar.add_cascade(label="About",  menu=aboutmenu)
 
 root.config(menu=menubar)
+
+shortcutbar = Frame(root, height=25, bg='light sea green')
+shortcutbar.pack(expand=NO, fill=X)
+lnlabel = Label(root, width=2, bg='antique white')
+lnlabel.pack(side=LEFT, anchor='nw', fill=Y)
+
+textpad = Text(root)
+textpad.pack(expand=YES, fill=BOTH)
+scroll=Scrollbar(textpad)
+textpad.configure(yscrollcommand=scroll.set)
+scroll.config(command=textpad.yview)
+scroll.pack(side=RIGHT, fill=Y)
 
 root.mainloop()
