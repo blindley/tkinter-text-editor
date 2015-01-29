@@ -1,5 +1,21 @@
 from tkinter import *
 root = Tk()
+root.geometry('350x350')
+
+def undo():
+    textPad.event_generate("<<Undo>>")
+
+def redo():
+    textPad.event_generate("<<Redo>>")
+
+def cut():
+    textPad.event_generate("<<Cut>>")
+
+def copy():
+    textPad.event_generate("<<Copy>>")
+
+def paste():
+    textPad.event_generate("<<Paste>>")
 
 def makeicon(name):
     return PhotoImage(file='icons/' + name + '.gif')
@@ -32,16 +48,16 @@ menubar.add_cascade(label="File", menu=filemenu)
 #Edit menu - Undo, Redo, Cut, Copy and Paste 
 editmenu = Menu(menubar, tearoff=0)
 editmenu.add_command(label="Undo", compound=LEFT,  image=undoicon,
-                     accelerator='Ctrl+Z')
+                     accelerator='Ctrl+Z', command=undo)
 editmenu.add_command(label="Redo", compound=LEFT,  image=redoicon,
-                     accelerator='Ctrl+Y')
+                     accelerator='Ctrl+Y', command=redo)
 editmenu.add_separator() 
 editmenu.add_command(label="Cut", compound=LEFT, image=cuticon,
-                     accelerator='Ctrl+X')
+                     accelerator='Ctrl+X', command=cut)
 editmenu.add_command(label="Copy", compound=LEFT, image=copyicon,
-                     accelerator='Ctrl+C')
+                     accelerator='Ctrl+C', command=copy)
 editmenu.add_command(label="Paste", compound=LEFT, image=pasteicon,
-                     accelerator='Ctrl+V')
+                     accelerator='Ctrl+V', command=paste)
 editmenu.add_separator()
 editmenu.add_command(label="Find",underline= 0, accelerator='Ctrl+F')
 editmenu.add_separator()
@@ -91,11 +107,11 @@ shortcutbar.pack(expand=NO, fill=X)
 lnlabel = Label(root, width=2, bg='antique white')
 lnlabel.pack(side=LEFT, anchor='nw', fill=Y)
 
-textpad = Text(root)
-textpad.pack(expand=YES, fill=BOTH)
-scroll=Scrollbar(textpad)
-textpad.configure(yscrollcommand=scroll.set)
-scroll.config(command=textpad.yview)
+textPad = Text(root, undo=True)
+textPad.pack(expand=YES, fill=BOTH)
+scroll=Scrollbar(textPad)
+textPad.configure(yscrollcommand=scroll.set)
+scroll.config(command=textPad.yview)
 scroll.pack(side=RIGHT, fill=Y)
 
 root.mainloop()
