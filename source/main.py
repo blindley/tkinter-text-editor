@@ -42,7 +42,14 @@ filemenu.add_command(label="Save", accelerator='Ctrl+S',compound=LEFT,
 filemenu.add_command(label="Save as",accelerator='Shift+Ctrl+S')
 filemenu.add_separator()
 filemenu.add_command(label="Exit", accelerator='Alt+F4') 
-menubar.add_cascade(label="File", menu=filemenu)  
+menubar.add_cascade(label="File", menu=filemenu)
+
+# config menu
+configmenu = Menu(menubar, tearoff=0 ) 
+configmenu.add_command(label="Language", underline=0)
+configmenu.add_command(label="Editor", underline=0)
+configmenu.add_command(label="Project", underline=0)
+menubar.add_cascade(label="Config", menu=configmenu)
 
 
 #Edit menu - Undo, Redo, Cut, Copy and Paste 
